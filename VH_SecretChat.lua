@@ -125,12 +125,8 @@ end
 end--]]
 
 function sendMessageEnyag(arg)
-	if arg ~= nil and #arg > 0 then
     sampAddChatMessage(database["settings"]["myPrefix"].." "..database["settings"]["myColorName"]..getMyNick() .. ': '..database["settings"]["colorMessage"].."".. arg, -1)
     cl:sendChat(CHANNEL, arg)
-	else
-		sampAddChatMessage("[SC] Пустое сообщение нельзя отправить =(", 0x0FFDB8B)
-	end
 end
 
 function imgui.OnDrawFrame()
