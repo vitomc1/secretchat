@@ -12,8 +12,6 @@ u8 = encoding.UTF8
 local rx, ry 				= getScreenResolution() -- // Размер экрана
 local mainMenu				= imgui.ImBool(false) -- // Основное меню
 
-local cl
-
 if not doesDirectoryExist(getWorkingDirectory().."/config") then
 	createDirectory(getWorkingDirectory().."/config")
 end
@@ -30,7 +28,7 @@ if not doesFileExist(getWorkingDirectory().."/config/secretChat/nsettings.json")
 			myColorMessage = "{ffffff}",
 			myColorName = "{B5B8B1}",
 			colorMessage = "{ffffff}",
-			keyChat = "#hf5901q"
+			keyChat = "#hf931qqrq5"
 		}
 	}))
 	io.close(fee)
@@ -61,7 +59,7 @@ function main()
  update()
  while not sampIsLocalPlayerSpawned() do wait(0) end -- ждём до спавна
 
- --sampRegisterChatCommand("test", sendServerMsg)
+ sampRegisterChatCommand("test", sendServerMsg)
  sampRegisterChatCommand("x", sendMessageEnyag)
  sampRegisterChatCommand(
 	"chatmenu",
@@ -74,7 +72,7 @@ function main()
  CHANNEL = database["settings"]["keyChat"] -- Канал, чтобы скрипты могли общаться между собой нужно чтобы они были в одном канале
 
  -- Let's go!
- cl:connect("irc.ircnet.ru") -- Сюда вводим адрес IRC сервера который работает на 6667 порту без TLS
+ cl:connect("irc.ea.libera.chat") -- Сюда вводим адрес IRC сервера который работает на 6667 порту без TLS
  cl:join(CHANNEL) -- Подключаемся к каналу!
 
  cl:hook("OnChat", function(user, channel, message) -- Хук на входящие сообщения из канала
@@ -119,10 +117,10 @@ function imgui.Hint(text, delay)
     end
 end
 
---[[function sendServerMsg(message)
+function sendServerMsg(message)
 	sampAddChatMessage(getMyNick() .. ': ' .. message, -1)
 	cl:sendChat(CHANNEL, message) -- Отправка сообщения в чат
-end--]]
+end
 
 function sendMessageEnyag(arg)
     sampAddChatMessage(database["settings"]["myPrefix"].." "..database["settings"]["myColorName"]..getMyNick() .. ': '..database["settings"]["colorMessage"].."".. arg, -1)
@@ -148,7 +146,7 @@ function imgui.OnDrawFrame()
 			imgui.PopItemWidth()
 			imgui.SameLine()
 			imgui.Button("(?)", imgui.ImVec2(25, 20))
-			imgui.Hint(u8("Ключ вашего канала, может быть абсолютно любым, который только можете придумать вы. Ключ - соеденяет пользователей в один чат. По дефолту #hf5901q"))
+			imgui.Hint(u8("Ключ вашего канала, может быть абсолютно любым, который только можете придумать вы. Ключ - соеденяет пользователей в один чат. По дефолту #hf931qqrq5"))
 			imgui.EndChild()
 
 			imgui.Text(u8("Настройки чата"))
